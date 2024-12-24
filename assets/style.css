@@ -1,0 +1,104 @@
+*{
+	margin: 0;
+	padding: 0;
+}
+.hero{
+	background-image: url('./images/slider2_6.jpg');
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	height:550px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: #fff;
+	/* font-size: 72px; */
+}
+
+.content{
+	text-align: center;
+	/* margin: auto; */
+}
+
+h1{
+	font-size: 72px;
+	margin-bottom: 40px;
+	/* background-image: linear-gradient(to right,#191b2a, #e04372,#3aa2ed,#191b2a); */
+	background-clip: text;
+	/* color: transparent; */
+}
+
+p{
+	font-size: 30px;
+	background-image: linear-gradient(to right,#f2f2f2, #0e0d0d,#472a17,#f2f2f2);
+	background-clip: text;
+	color: transparent;
+}
+
+/*=================================================================== animation slider========================================================= */
+.slider{
+	width: 100%;
+	/* border: 1px solid red; */
+	height: var(--height);
+	overflow: hidden;
+	/* background-image: linear-gradient( to right,transparent,#000,transparent); for incrising the black color %  to show the more content(eg. 10%, 90%) */
+	mask-image: linear-gradient( to right,transparent,#000 20% 80%,transparent);
+}
+
+.slider .list{
+	display: flex;
+	/* align-items: center; */
+	width: 100%;
+	min-width: calc(var(--width) * var(--quantity));
+	position: relative
+}
+
+.slider .list .item{
+	width: var(--width);
+	height: var(--height);
+	position: absolute;
+	left: 100%;
+	animation: autoRun 20s linear infinite;
+	animation-delay: calc( ( 20s / var(--quantity) ) * (var(--position) - 1) ) !important;
+	transition: 500ms;
+}
+
+.slider .list .item img{
+	width:100%;
+	/* height: var(--height); */
+	object-fit: contain;
+}
+
+@keyframes autoRun{
+	from{
+		left:100%;
+	}
+	to{
+		left: calc(var(--width) * -1);
+	}
+}
+
+.slider:hover .item{
+	animation-play-state: paused!important;
+	filter: grayscale(1);
+}
+
+.slider .item:hover{
+	filter: grayscale(0);
+	/* scale:1.1; */
+}
+
+.slider[reverse="true"] .item{
+	animation: reversePlay 20s linear infinite;
+}
+
+@keyframes reversePlay{
+	from{
+		left: calc(var(--width) * -1)
+	}
+	to{
+		left:100%
+	}
+}
+
+/* if you want to give animation slider time different for both slider then you have to define "animation-delay" for the different time slider  */
